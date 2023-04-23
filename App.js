@@ -1,11 +1,12 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
-import { CurrentWeather } from './src/components/CurrentWeather'
+import { CurrentWeather, UpcomingWeather } from './src/components'
 
 const App = () => {
     return (
         <SafeAreaView style={styles.wrapper}>
-            <CurrentWeather />
+            {/* <CurrentWeather /> */}
+            <UpcomingWeather />
         </SafeAreaView>
     )
 }
