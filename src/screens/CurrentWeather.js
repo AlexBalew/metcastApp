@@ -1,29 +1,51 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+import { RowText } from '../components'
 
 export const CurrentWeather = () => {
+    const {
+        wrapper,
+        container,
+        bodyWrapper,
+        description,
+        feels,
+        highLow,
+        highLowWrapper,
+        message,
+        temp
+    } = styles
+
     return (
-        <>
-            <View style={styles.container}>
+        <SafeAreaView style={wrapper}>
+            <View style={container}>
                 <Text>Current weather</Text>
                 <Feather name="sun" size={100} color="black" />
-                <Text style={styles.temp}>18</Text>
-                <Text style={styles.feels}>Feels like 25</Text>
-                <View style={styles.highLowWrapper}>
-                    <Text style={styles.highLow}>High: 20</Text>
-                    <Text style={styles.highLow}>Low: 12</Text>
-                </View>
+                <Text style={temp}>18</Text>
+                <Text style={feels}>Feels like 25</Text>
+                <RowText
+                    description="High: 20"
+                    message="Low: 12"
+                    bodyTextStyles={highLowWrapper}
+                    descriptionStyles={highLow}
+                />
             </View>
-            <View style={styles.bodyWrapper}>
-                <Text style={styles.description}>Its sunny</Text>
-                <Text style={styles.message}>Its perfect t-shirt weather</Text>
-            </View>
-        </>
+            <RowText
+                description="Its sunny"
+                message="Its perfect t-shirt weather"
+                bodyTextStyles={bodyWrapper}
+                descriptionStyles={description}
+                messageStyles={message}
+            />
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    wrapper: {
+        backgroundColor: 'pink',
+        flex: 1
+    },
     container: {
         flex: 1,
         alignItems: 'center',

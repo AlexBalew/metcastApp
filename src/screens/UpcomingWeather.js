@@ -49,11 +49,13 @@ const DATA = [
 ]
 
 export const UpcomingWeather = () => {
+    const { container, background } = styles
+
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={container}>
             <ImageBackground
                 source={require('../../assets/clouds.jpg')}
-                style={styles.background}
+                style={background}
             >
                 <Text>Upcoming weather</Text>
                 <FlatList
@@ -73,5 +75,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: StatusBar.currentHeight || 0
+    },
+    background: {
+        flex: 1
     }
 })
