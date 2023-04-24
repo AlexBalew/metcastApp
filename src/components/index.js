@@ -1,2 +1,1 @@
-export { CurrentWeather } from './CurrentWeather'
-export { UpcomingWeather } from './UpcomingWeather'
+export { WeatherItem } from './WeatherItem'

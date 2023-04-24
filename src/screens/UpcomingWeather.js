@@ -3,12 +3,11 @@ import {
     StyleSheet,
     Text,
     SafeAreaView,
-    View,
     FlatList,
     StatusBar,
     ImageBackground
 } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import { renderWeatherItem } from '../utils'
 
 const DATA = [
     {
@@ -49,27 +48,7 @@ const DATA = [
     }
 ]
 
-export const WeatherItem = ({ dtText, minTemp, maxTemp, condition }) => {
-    return (
-        <View style={styles.weatherItem}>
-            <Feather name={condition.main} size={50} color="white" />
-            <Text style={styles.date}>{dtText}</Text>
-            <Text style={styles.temp}>{minTemp}</Text>
-            <Text style={styles.temp}>{maxTemp}</Text>
-        </View>
-    )
-}
-
 export const UpcomingWeather = () => {
-    const renderItem = ({ item }) => (
-        <WeatherItem
-            condition={item.weather[0]}
-            dtText={item.dt_txt}
-            maxTemp={item.main.temp_max}
-            minTemp={item.main.temp_min}
-        />
-    )
-
     return (
         <SafeAreaView style={styles.container}>
             <ImageBackground
@@ -79,7 +58,7 @@ export const UpcomingWeather = () => {
                 <Text>Upcoming weather</Text>
                 <FlatList
                     data={DATA}
-                    renderItem={renderItem}
+                    renderItem={renderWeatherItem}
                     keyExtractor={(item) => item.dt_txt}
                 />
             </ImageBackground>
@@ -94,27 +73,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: StatusBar.currentHeight || 0
-    },
-    weatherItem: {
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderWidth: 5,
-        borderColor: 'white',
-        backgroundColor: 'pink'
-    },
-    temp: {
-        color: 'white',
-        fontSize: 20
-    },
-    date: {
-        color: 'white',
-        fontSize: 15
-    },
-    background: {
-        flex: 1
     }
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
-import { CurrentWeather, UpcomingWeather } from './src/components'
+import { CurrentWeather, UpcomingWeather } from './src/screens'
 
 const App = () => {
     return (
