@@ -1,9 +1,10 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import { RowText } from '../components'
+import { RowText } from '../components/RowText'
+import { weatherType } from '../utils'
 
-export const CurrentWeather = () => {
+export const CurrentWeather = ({ weatherData }) => {
     const {
         wrapper,
         container,
@@ -13,26 +14,45 @@ export const CurrentWeather = () => {
         highLow,
         highLowWrapper,
         message,
-        temp
+        temperature
     } = styles
 
+    const {
+        main: { temp, feels_like, temp_max, temp_min },
+        weather
+    } = weatherData
+
+    const weatherCondition = weather[0].main
+
     return (
-        <SafeAreaView style={wrapper}>
+        <SafeAreaView
+            style={[
+                wrapper,
+                {
+                    backgroundColor:
+                        weatherType[weatherCondition].backgroundColor
+                }
+            ]}
+        >
             <View style={container}>
                 <Text>Current weather</Text>
-                <Feather name="sun" size={100} color="black" />
-                <Text style={temp}>18</Text>
-                <Text style={feels}>Feels like 25</Text>
+                <Feather
+                    name={weatherType[weatherCondition].icon}
+                    size={100}
+                    color="white"
+                />
+                <Text style={temperature}>{temp}</Text>
+                <Text style={feels}>Feels like {feels_like}</Text>
                 <RowText
-                    description="High: 20"
-                    message="Low: 12"
+                    description={`High: ${temp_max}`}
+                    message={`Low: ${temp_min}`}
                     bodyTextStyles={highLowWrapper}
                     descriptionStyles={highLow}
                 />
             </View>
             <RowText
-                description="Its sunny"
-                message="Its perfect t-shirt weather"
+                description={weather[0].description}
+                message={weatherType[weatherCondition].message}
                 bodyTextStyles={bodyWrapper}
                 descriptionStyles={description}
                 messageStyles={message}
@@ -51,7 +71,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    temp: {
+    temperature: {
         color: 'black',
         fontSize: 48
     },

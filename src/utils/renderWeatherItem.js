@@ -1,5 +1,5 @@
 import React from 'react'
-import { WeatherItem } from '../components'
+import { WeatherItem } from '../components/WeatherItem'
 
 export const renderWeatherItem = ({ item }) => (
     <WeatherItem
