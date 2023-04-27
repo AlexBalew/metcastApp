@@ -3,13 +3,15 @@ import {
     StyleSheet,
     Text,
     SafeAreaView,
-    StatusBar,
     View,
     ImageBackground
 } from 'react-native'
 import { IconText } from '../components/IconText'
+import moment from 'moment'
 
-export const City = () => {
+export const City = ({
+    weatherData: { name, country, population, sunrise, sunset }
+}) => {
     const {
         container,
         background,
@@ -29,25 +31,25 @@ export const City = () => {
                 source={require('../../assets/london.jpg')}
                 style={background}
             >
-                <Text style={[cityText, cityName]}>City name</Text>
-                <Text style={[cityText, countryName]}>Country</Text>
+                <Text style={[cityText, cityName]}>{name}</Text>
+                <Text style={[cityText, countryName]}>{country}</Text>
                 <View style={[populationWrapper, rowLayout]}>
                     <IconText
                         iconName="user"
                         iconColor="red"
-                        bodyText="500 000"
+                        bodyText={`Population: ${population}`}
                         bodyTextStyles={populationText}
                     />
                 </View>
                 <View style={[riseSetWrapper, rowLayout]}>
                     <IconText
                         iconName="sunrise"
-                        bodyText="10:47:58am"
+                        bodyText={moment(sunrise).format('h:mm:ss a')}
                         bodyTextStyles={riseSetText}
                     />
                     <IconText
                         iconName="sunset"
-                        bodyText="17:56:23pm"
+                        bodyText={moment(sunset).format('h:mm:ss a')}
                         bodyTextStyles={riseSetText}
                     />
                 </View>
@@ -58,8 +60,7 @@ export const City = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginTop: StatusBar.currentHeight || 0
+        flex: 1
     },
     background: {
         flex: 1

@@ -4,9 +4,9 @@ import { WEATHER_API_KEY } from '@env'
 
 export const useGetWeather = () => {
     const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState('')
-    const [latitude, setLatitude] = useState(null)
-    const [longitude, setLongitude] = useState(null)
+    const [error, setError] = useState(null)
+    const [latitude, setLatitude] = useState([])
+    const [longitude, setLongitude] = useState([])
     const [weather, setWeather] = useState([])
 
     const fetchWeatherData = async () => {
@@ -16,9 +16,8 @@ export const useGetWeather = () => {
             )
             const data = await res.json()
             setWeather(data)
-        } catch (e) {
-            setError(e)
-            console.log('could not fetch weather')
+        } catch (err) {
+            setError('could not fetch weather')
         } finally {
             setIsLoading(false)
         }

@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { RowText } from '../components/RowText'
-import { weatherType } from '../utils'
+import { weatherType } from '../utils/weatherType'
 
 export const CurrentWeather = ({ weatherData }) => {
     const {
@@ -22,7 +22,7 @@ export const CurrentWeather = ({ weatherData }) => {
         weather
     } = weatherData
 
-    const weatherCondition = weather[0].main
+    const weatherCondition = weather[0]?.main
 
     return (
         <SafeAreaView
@@ -30,29 +30,28 @@ export const CurrentWeather = ({ weatherData }) => {
                 wrapper,
                 {
                     backgroundColor:
-                        weatherType[weatherCondition].backgroundColor
+                        weatherType[weatherCondition]?.backgroundColor
                 }
             ]}
         >
             <View style={container}>
-                <Text>Current weather</Text>
                 <Feather
-                    name={weatherType[weatherCondition].icon}
+                    name={weatherType[weatherCondition]?.icon}
                     size={100}
                     color="white"
                 />
-                <Text style={temperature}>{temp}</Text>
-                <Text style={feels}>Feels like {feels_like}</Text>
+                <Text style={temperature}>{`${temp}°`}</Text>
+                <Text style={feels}>Feels like {feels_like}°</Text>
                 <RowText
-                    description={`High: ${temp_max}`}
-                    message={`Low: ${temp_min}`}
+                    description={`High: ${temp_max}° `}
+                    message={`Low: ${temp_min}°`}
                     bodyTextStyles={highLowWrapper}
                     descriptionStyles={highLow}
                 />
             </View>
             <RowText
-                description={weather[0].description}
-                message={weatherType[weatherCondition].message}
+                description={weather[0]?.description}
+                message={weatherType[weatherCondition]?.message}
                 bodyTextStyles={bodyWrapper}
                 descriptionStyles={description}
                 messageStyles={message}
@@ -63,7 +62,6 @@ export const CurrentWeather = ({ weatherData }) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: 'pink',
         flex: 1
     },
     container: {
@@ -94,9 +92,9 @@ const styles = StyleSheet.create({
         marginBottom: 40
     },
     description: {
-        fontSize: 48
+        fontSize: 43
     },
     message: {
-        fontSize: 30
+        fontSize: 25
     }
 })
